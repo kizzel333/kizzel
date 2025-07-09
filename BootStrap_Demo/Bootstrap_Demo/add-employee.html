@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Console</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #e0f7fa;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #26c6da;
+      margin-bottom: 30px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .console {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+      box-shadow: 0 10px 30px rgba(38, 198, 218, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: rgba(0, 172, 193, 0.3);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    td input {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    td input::placeholder {
+      color: #b2ebf2;
+    }
+
+    .add-btn {
+      background-color: #26c6da;
+      color: #1a1a1a;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+      float: right;
+    }
+
+    .add-btn:hover {
+      background-color: #00acc1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Employee list</h1>
+
+  <div class="list">
+    <table id="employeeTable">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Last Name</th>
+          <th>Position</th>
+          <th>Office</th>
+        </tr>
+      </thead>
+      <tbody id="employeeBody">
+        <tr>
+          <td><input type="text" id="empId" placeholder="e.g. 1021" /></td>
+          <td><input type="text" id="lastName" placeholder="e.g. Reyes" /></td>
+          <td><input type="text" id="position" placeholder="e.g. Manager" /></td>
+          <td><input type="text" id="office" placeholder="e.g. Cebu" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="add-btn" onclick="addEmployee()">Add</button>
+  </div>
+
+  <script>
+    function addEmployee() {
+      const id = document.getElementById("empId").value.trim();
+      const last = document.getElementById("lastName").value.trim();
+      const pos = document.getElementById("position").value.trim();
+      const office = document.getElementById("office").value.trim();
+
+      if (!id || !last || !pos || !office) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${id}</td>
+        <td>${last}</td>
+        <td>${pos}</td>
+        <td>${office}</td>
+      `;
+
+      document.getElementById("employeeBody").appendChild(row);
+
+      // Clear form inputs
+      document.getElementById("empId").value = "";
+      document.getElementById("lastName").value = "";
+      document.getElementById("position").value = "";
+      document.getElementById("office").value = "";
+    }
+  </script>
+
+</body>
+</html>

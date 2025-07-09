@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px 15px;
+      background: linear-gradient(to right, #1a1a1a, #0f0f0f);
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffc0cb;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff69b4;
+      text-shadow: 0 0 10px #ffb6c1;
+      margin-bottom: 25px;
+    }
+
+    .glass-box {
+      background: rgba(255, 192, 203, 0.05);
+      border: 1px solid rgba(255, 192, 203, 0.15);
+      border-radius: 16px;
+      padding: 25px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 8px 28px rgba(255, 105, 180, 0.25);
+      backdrop-filter: blur(12px);
+    }
+
+    form label {
+      display: block;
+      margin-top: 14px;
+      font-weight: 600;
+      color: #ffc0cb;
+    }
+
+    form input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 15px;
+    }
+
+    form input::placeholder {
+      color: #ffb6c1;
+    }
+
+    form button {
+      background-color: #ff69b4;
+      color: #1a1a1a;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #e754a1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border: 1px solid rgba(255, 182, 193, 0.2);
+    }
+
+    th {
+      background-color: rgba(255, 105, 180, 0.2);
+      color: #ffc0cb;
+      text-shadow: 0 0 6px #ff69b4;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .delete-btn {
+      background-color: #ff3e7f;
+      border: none;
+      padding: 6px 14px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .delete-btn:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Employee List</h1>
+
+  <div class="glass-box">
+    <form id="employeeForm">
+      <label for="emp_id">Employee ID</label>
+      <input type="text" id="emp_id" placeholder="BP123" required />
+
+      <label for="last_name">Last Name</label>
+      <input type="text" id="last_name" placeholder="Kim" required />
+
+      <label for="position">Position</label>
+      <input type="text" id="position" placeholder="Vocalist" required />
+
+      <label for="office">Office</label>
+      <input type="text" id="office" placeholder="Seoul" required />
+
+      <button type="submit">Add to Table</button>
+    </form>
+
+    <table id="employeeTable">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Last Name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamically inserted rows -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", loadEmployees);
+
+    document.getElementById("employeeForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const emp_id = document.getElementById("emp_id").value.trim();
+      const last_name = document.getElementById("last_name").value.trim();
+      const position = document.getElementById("position").value.trim();
+      const office = document.getElementById("office").value.trim();
+
+      if (!emp_id || !last_name || !position || !office) {
+        alert("Complete all fields!");
+        return;
+      }
+
+      const employee = { emp_id, last_name, position, office };
+      saveEmployee(employee);
+      this.reset();
+      logStyled(`Added 🩷: ${last_name}`, 'add');
+    });
+
+    function saveEmployee(employee) {
+      const employees = JSON.parse(localStorage.getItem("blackpink_employees")) || [];
+      employees.push(employee);
+      localStorage.setItem("blackpink_employees", JSON.stringify(employees));
+      loadEmployees();
+    }
+
+    function loadEmployees() {
+      const employees = JSON.parse(localStorage.getItem("blackpink_employees")) || [];
+      const tbody = document.querySelector("#employeeTable tbody");
+      tbody.innerHTML = "";
+
+      employees.forEach((emp, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${emp.emp_id}</td>
+          <td>${emp.last_name}</td>
+          <td>${emp.position}</td>
+          <td>${emp.office}</td>
+          <td><button class="delete-btn" onclick="deleteEmployee(${index})">Delete</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function deleteEmployee(index) {
+      const employees = JSON.parse(localStorage.getItem("blackpink_employees")) || [];
+      const removed = employees[index]?.last_name || "Unknown";
+      employees.splice(index, 1);
+      localStorage.setItem("blackpink_employees", JSON.stringify(employees));
+      loadEmployees();
+      logStyled(`Removed 💔: ${removed}`, 'delete');
+    }
+
+    function logStyled(message, type) {
+      const styles = {
+        add: "color: #ff69b4; background: rgba(255, 105, 180, 0.1); padding: 4px 10px; border-radius: 6px;",
+        delete: "color: #f06292; background: rgba(240, 98, 146, 0.1); padding: 4px 10px; border-radius: 6px;"
+      };
+      console.log(`%c${message}`, styles[type] || "");
+    }
+  </script>
+
+</body>
+</html>
