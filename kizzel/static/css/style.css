@@ -1,0 +1,164 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Primary Colors */
+:root {
+    --primary-color: #d9534f; /* Pink */
+    --secondary-color: #f5c6cb; /* Soft Pink */
+    --accent-color: #f1f1f1; /* Light Gray */
+    --text-color: #212529; /* Dark Text */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #f5c6cb;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding-top: 2rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.sidebar .sidebar-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 270px; /* to create space for sidebar */
+    padding: 2rem;
+    background-color: var(--accent-color);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    padding: 2rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.card .btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card .btn:hover {
+    background-color: #c9302c;
+}
+
+/* Dashboard Actions (e.g., Add Employee, View Employees) */
+.dashboard-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-actions .btn {
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-actions .btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
