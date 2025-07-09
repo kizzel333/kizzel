@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Edit Employee{% endblock %}
+
+{% block content %}
+<div class="mx-auto" style="max-width: 500px;">
+  <div class="text-center mb-3">
+    <img src="{{ url_for('static', filename='user-icon.png') }}" class="rounded-circle" width="80" alt="User Icon">
+  </div>
+  <div class="text-center mb-3">
+    <h3 class="text-warning">Edit Employee</h3>
+  </div>
+  <form method="post" class="bg-white p-4 rounded-3 shadow-lg">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-person-fill text-muted"></i>
+        </span>
+        <input type="text" class="form-control border-start-0" id="name" name="name" value="{{ employee.name }}" required>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-envelope-fill text-muted"></i>
+        </span>
+        <input type="email" class="form-control border-start-0" id="email" name="email" value="{{ employee.email }}" required>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="position" class="form-label">Position</label>
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-briefcase-fill text-muted"></i>
+        </span>
+        <input type="text" class="form-control border-start-0" id="position" name="position" value="{{ employee.position }}" required>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="salary" class="form-label">Salary</label>
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-cash-stack text-muted"></i>
+        </span>
+        <input type="number" class="form-control border-start-0" id="salary" name="salary" value="{{ employee.salary }}" required>
+      </div>
+    </div>
+    <button class="btn btn-warning w-100 py-2">Update Employee</button>
+  </form>
+  <div class="text-center mt-3">
+    <a href="/dashboard" class="text-decoration-none text-white small">Back to Dashboard</a>
+  </div>
+</div>
+{% endblock %}

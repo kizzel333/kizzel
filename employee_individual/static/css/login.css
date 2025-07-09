@@ -1,0 +1,38 @@
+body {
+    background: linear-gradient(to right, #fdfbfb, #ebedee);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-card {
+    background: linear-gradient(to bottom right, #ffe0ec, #e0f7ff);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #d63384;
+}
+
+.btn-login {
+    background: #d63384;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+    background: #c2185b;
+}
+
+.signup-link {
+    color: #d63384;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
